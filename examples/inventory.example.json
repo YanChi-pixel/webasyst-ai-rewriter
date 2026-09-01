@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://your-shop.example.com/product/example-fabric/",
+    "product_id": 1234,
+    "title": "Ткань «Пример» арт. 100/200 — страница товара",
+    "needs_rewrite": true,
+    "features": {
+      "Состав": "20% хлопок, 80% полиэфир",
+      "Плотность": "170 г/м²",
+      "Ширина": "150 см",
+      "Отделка": "ВО (водоотталкивающая)"
+    },
+    "old_description": "<div itemprop=\"description\">Старое описание сплошным текстом…</div>",
+    "summary": "Старое краткое описание"
+  }
+]
