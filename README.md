@@ -12,6 +12,10 @@ on the live page — automatically, in controllable batches, with full rollback.
 
 ---
 
+![Pipeline architecture](docs/architecture.png)
+
+---
+
 ## What problem it solves
 
 Manually rewriting hundreds of product cards is weeks of monotonous work.
