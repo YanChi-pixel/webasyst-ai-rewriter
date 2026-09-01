@@ -15,17 +15,24 @@ import re
 import urllib.request
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
 
 try:
     from .config import (
-        PROJECT_DIR, SCAN_LIMIT, SCAN_WORKERS, NEW_MARKERS,
-        WEBASYST_BASE_URL, SITEMAP_PATH,
+        NEW_MARKERS,
+        PROJECT_DIR,
+        SCAN_LIMIT,
+        SCAN_WORKERS,
+        SITEMAP_PATH,
+        WEBASYST_BASE_URL,
     )
 except ImportError:
     from config import (
-        PROJECT_DIR, SCAN_LIMIT, SCAN_WORKERS, NEW_MARKERS,
-        WEBASYST_BASE_URL, SITEMAP_PATH,
+        NEW_MARKERS,
+        PROJECT_DIR,
+        SCAN_LIMIT,
+        SCAN_WORKERS,
+        SITEMAP_PATH,
+        WEBASYST_BASE_URL,
     )
 
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
@@ -86,7 +93,7 @@ def needs_rewrite(page_html: str) -> bool:
 
 
 def extract_title(page_html: str) -> str:
-    match = re.search(r"<title>(.*?)</title>", page_html, re.S)
+    match = re.search(r"<title>(.*?)</title>", page_html, re.DOTALL)
     return html_mod.unescape(match.group(1)).strip() if match else ""
 
 
@@ -100,7 +107,7 @@ def extract_features(page_html: str) -> dict[str, str]:
     for match in re.finditer(
         r'<tr class="product_features-item[^"]*">\s*<td class="product_features-title">'
         r'<span>(.*?)</span></td>\s*<td class="product_features-value">(.*?)</td>',
-        block, re.S,
+        block, re.DOTALL,
     ):
         key = clean(match.group(1))
         val = clean(match.group(2))
@@ -114,12 +121,12 @@ def extract_old_description(page_html: str) -> str:
     if i < 0:
         return ""
     block = page_html[i:i + 60000]
-    match = re.search(r'<div itemprop="description">(.*?)</div></div></div>', block, re.S)
+    match = re.search(r'<div itemprop="description">(.*?)</div></div></div>', block, re.DOTALL)
     return match.group(1).strip() if match else ""
 
 
 def extract_summary(page_html: str) -> str:
-    match = re.search(r'<div class="product-card__summary">(.*?)</div>', page_html, re.S)
+    match = re.search(r'<div class="product-card__summary">(.*?)</div>', page_html, re.DOTALL)
     return clean(match.group(1)) if match else ""
 
 

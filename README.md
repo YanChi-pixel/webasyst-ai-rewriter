@@ -194,9 +194,10 @@ through `shop.product.update` (see `src/webasyst_api.py`).
 - **Rewrite markers** — set `NEW_MARKERS` in `.env` to the CSS classes that
   identify your "new format" description. If at least one marker is missing,
   the product is treated as needing a rewrite.
-- **Copywriter prompt** — edit `prompts/product_prompt.md`. The bundled prompt
-  targets a textile catalog; keep the strict structure and JSON contract, and
-  replace the few-shot example with one of *your* already-rewritten cards.
+- **Copywriter prompt** — edit `prompts/product_prompt.md` (niche-neutral by
+  default). For a stronger few-shot anchor, copy one of the ready-made niche
+  prompts from `prompts/examples/` (textiles, electronics, furniture) into
+  `product_prompt.md`.
 - **Theme selectors** — the scanner's HTML extraction assumes the Shop-Script
   `mastershop` theme (`#product-description`, `#product-options`,
   `product-card__summary`, `data-product`). If your theme differs, adjust the
@@ -217,9 +218,13 @@ webasyst-ai-rewriter/
 │   ├── report.py            # done-URLs report
 │   └── make_report.py       # per-batch report
 ├── prompts/
-│   └── product_prompt.md    # copywriter system prompt
+│   ├── product_prompt.md    # niche-neutral system prompt
+│   └── examples/            # ready-made prompts: textile / electronics / furniture
 ├── examples/
 │   └── inventory.example.json
+├── .github/
+│   └── workflows/ci.yml     # lint + compile + smoke import test
+├── CHANGELOG.md
 ├── .env.example
 └── requirements.txt
 ```

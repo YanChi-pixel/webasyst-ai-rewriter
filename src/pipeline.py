@@ -17,14 +17,15 @@ import sys
 import time
 
 try:
-    from . import llm_client, poster, validator, webasyst_api as api
-    from .config import PROJECT_DIR, DELAY_SECONDS, BATCH_SIZE, WEBASYST_TOKEN
+    from . import llm_client, poster, validator
+    from . import webasyst_api as api
+    from .config import BATCH_SIZE, DELAY_SECONDS, PROJECT_DIR, WEBASYST_TOKEN
 except ImportError:
     import llm_client
     import poster
     import validator
     import webasyst_api as api
-    from config import PROJECT_DIR, DELAY_SECONDS, BATCH_SIZE, WEBASYST_TOKEN
+    from config import BATCH_SIZE, DELAY_SECONDS, PROJECT_DIR, WEBASYST_TOKEN
 
 DATA_DIR = PROJECT_DIR / "data"
 INVENTORY_PATH = DATA_DIR / "inventory.json"

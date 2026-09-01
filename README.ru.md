@@ -155,9 +155,9 @@ Lock-файл `data/pipeline.lock` защищает от двух паралле
 ## Настройка под свой магазин
 
 - **Маркеры рерайта** — задай `NEW_MARKERS` в `.env` под свои CSS-классы.
-- **Промпт копирайтера** — отредактируй `prompts/product_prompt.md`. Замени
-  few-shot пример на свою уже переписанную карточку, сохранив структуру и
-  JSON-контракт.
+- **Промпт копирайтера** — отредактируй `prompts/product_prompt.md` (по умолчанию
+  нишево-нейтральный). Для более стабильного few-shot скопируй готовый промпт из
+  `prompts/examples/` (текстиль, электроника, мебель) в `product_prompt.md`.
 - **Селекторы темы** — извлечение HTML рассчитано на тему Shop-Script
   `mastershop` (`#product-description`, `#product-options`,
   `product-card__summary`, `data-product`). Для другой темы поправь селекторы

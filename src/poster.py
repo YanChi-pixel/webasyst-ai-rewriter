@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 try:
@@ -18,7 +18,7 @@ BACKUP_DIR = PROJECT_DIR / "data" / "backups"
 def backup(product_id: int | None, old_fields: dict) -> Path:
     """Save the current product fields as a rollback point."""
     BACKUP_DIR.mkdir(parents=True, exist_ok=True)
-    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     path = BACKUP_DIR / f"product_{product_id}_{ts}.json"
     path.write_text(
         json.dumps(old_fields, ensure_ascii=False, indent=2), encoding="utf-8"

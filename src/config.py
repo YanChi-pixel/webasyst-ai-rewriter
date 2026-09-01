@@ -15,7 +15,10 @@ from pathlib import Path
 try:
     from dotenv import load_dotenv
 except ImportError:  # python-dotenv is optional
-    load_dotenv = lambda *a, **k: None
+
+    def load_dotenv(*args, **kwargs) -> None:
+        """No-op fallback when python-dotenv is not installed."""
+        return None
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = Path(os.getenv("PROJECT_DIR", str(BASE_DIR)))
@@ -44,8 +47,7 @@ LLM_API_BASE = (
 ).rstrip("/")
 # Defensive: if a full /chat/completions URL was supplied, trim the suffix,
 # because llm_client appends it itself.
-if LLM_API_BASE.endswith("/chat/completions"):
-    LLM_API_BASE = LLM_API_BASE[: -len("/chat/completions")]
+LLM_API_BASE = LLM_API_BASE.removesuffix("/chat/completions")
 
 LLM_API_KEY = get("LLM_API_KEY") or get("DEEPSEEK_API_KEY")
 LLM_MODEL = get("LLM_MODEL") or get("DEEPSEEK_MODEL") or "deepseek-chat"

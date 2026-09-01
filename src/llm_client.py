@@ -89,7 +89,7 @@ def build_messages(item: dict, seo_required: bool) -> list[dict]:
 def parse_json_response(text: str) -> dict:
     """Extract a JSON object from the model's reply (handles markdown fences)."""
     text = text.strip()
-    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.S)
+    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.DOTALL)
     start, end = text.find("{"), text.rfind("}")
     if start < 0 or end < 0:
         raise LLMError(f"No JSON found in response: {text[:300]}")
