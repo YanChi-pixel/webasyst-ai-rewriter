@@ -38,10 +38,10 @@ def main() -> int:
 
     repo_id = "%s/%s" % (namespace, DATASET_NAME)
     create_repo(repo_id, repo_type="dataset", exist_ok=True, token=token)
-    upload_file(str(DATA), path_in_repo="rewrites.jsonl", repo_id=repo_id,
-                repo_type="dataset", token=token)
-    upload_file(str(CARD), path_in_repo="README.md", repo_id=repo_id,
-                repo_type="dataset", token=token)
+    upload_file(path_or_fileobj=str(DATA), path_in_repo="rewrites.jsonl",
+                repo_id=repo_id, repo_type="dataset", token=token)
+    upload_file(path_or_fileobj=str(CARD), path_in_repo="README.md",
+                repo_id=repo_id, repo_type="dataset", token=token)
     print("готово: https://huggingface.co/datasets/%s" % repo_id)
     return 0
 
