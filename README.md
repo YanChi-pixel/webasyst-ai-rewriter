@@ -10,6 +10,8 @@ on the live page — automatically, in controllable batches, with full rollback.
 
 > Русская версия: [README.ru.md](README.ru.md)
 
+[![Dataset on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-product--card--rewrites-yellow)](https://huggingface.co/datasets/WildFuria/product-card-rewrites)
+
 ---
 
 ![Pipeline architecture](docs/architecture.png)
@@ -258,6 +260,19 @@ webasyst-ai-rewriter/
 - Do not commit `.env` — it is ignored via `.gitignore`.
 - The tool writes `meta_title` / `meta_description` **only into empty fields**;
   existing SEO is never touched.
+
+## Dataset on Hugging Face
+
+The same prompt and the same few-shot examples, applied to synthetic products,
+are published as an **anonymized dataset** of rewrites: product facts → full card
+description + summary + SEO tags, 24 examples across textiles, electronics and
+furniture.
+
+- 📦 [huggingface.co/datasets/WildFuria/product-card-rewrites](https://huggingface.co/datasets/WildFuria/product-card-rewrites)
+- reproducible from this repository: `python hf/build_dataset.py --backend deepseek`
+  (or `--backend ollama` for a local model), then `python hf/upload.py`;
+- no client data: every brand, article code and price in the dataset is invented.
+  See [`hf/README.md`](hf/README.md).
 
 ## License
 

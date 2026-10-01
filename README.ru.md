@@ -10,6 +10,8 @@ REST API Webasyst и проверяет изменения на живой ст�
 
 ![Архитектура конвейера](docs/architecture.png)
 
+[![Датасет на Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-product--card--rewrites-yellow)](https://huggingface.co/datasets/WildFuria/product-card-rewrites)
+
 ## Какую задачу решает
 
 Ручной рерайт сотен карточек — это недели монотонной работы. Проект превращает
@@ -180,6 +182,18 @@ Lock-файл `data/pipeline.lock` защищает от двух паралле
 - **Модель выдумывает факты** — промпт это запрещает, few-shot стабилизирует.
   Для жёсткой гарантии добавь пост-проверку: ключевые числа из
   характеристик должны встретиться в `description_html`.
+
+## Датасет на Hugging Face
+
+Тот же промпт и те же few-shot примеры, применённые к синтетическим товарам,
+опубликованы как **обезличенный датасет**: факты товара → полное описание карточки
++ краткое описание + SEO-теги. 24 примера: ткани, электроника, мебель.
+
+- 📦 [huggingface.co/datasets/WildFuria/product-card-rewrites](https://huggingface.co/datasets/WildFuria/product-card-rewrites)
+- воспроизводится из этого репозитория: `python hf/build_dataset.py --backend deepseek`
+  (или `--backend ollama` для локальной модели), затем `python hf/upload.py`;
+- клиентских данных нет: все бренды, артикулы и цены в датасете вымышлены.
+  Подробности — в [`hf/README.md`](hf/README.md).
 
 ## Лицензия
 
