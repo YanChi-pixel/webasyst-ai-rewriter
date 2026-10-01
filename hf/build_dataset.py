@@ -125,7 +125,7 @@ def call_llm(system: str, facts: str, backend: str, ollama_model: str = OLLAMA_W
 
 def parse_json(text: str) -> dict:
     text = text.strip()
-    fence = re.search(r"```(?:json)?\s*(.*?)```", text, re.S)
+    fence = re.search(r"```(?:json)?\s*(.*?)```", text, re.DOTALL)
     if fence:
         text = fence.group(1).strip()
     # частая ошибка модели: запятая перед закрывающей скобкой
